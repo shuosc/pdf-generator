@@ -1,0 +1,23 @@
+{
+  "name": "pdf-generator",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "license": "MIT",
+  "dependencies": {
+    "koa": "^2.7.0",
+    "koa-router": "^7.4.0",
+    "pdfmake": "^0.1.57"
+  },
+  "devDependencies": {
+    "@types/koa": "^2.0.49",
+    "@types/koa-router": "^7.0.42",
+    "@types/pdfmake": "^0.1.7",
+    "nodemon": "^1.19.1",
+    "ts-node": "^8.3.0",
+    "typescript": "^3.5.3"
+  },
+  "scripts": {
+    "start": "tsc && node dist/index.js",
+    "dev": "nodemon --watch 'src/**/*' -e ts,tsx --exec 'ts-node' ./src/index.ts"
+  }
+}
