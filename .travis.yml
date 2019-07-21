@@ -1,7 +1,5 @@
 services:
   - docker
-addons:
-  ssh_known_hosts: helper.gtmdcm.com
 language: node_js
 jobs:
   include:
@@ -15,6 +13,6 @@ jobs:
         - set -e
         - yarn build
         - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
-        - docker build . pdf-generator
+        - docker build .
         - docker tag pdf-generator $DOCKER_USERNAME/pdf-generator
         - docker push $DOCKER_USERNAME/pdf-generator
