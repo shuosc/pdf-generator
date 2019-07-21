@@ -1,0 +1,20 @@
+services:
+  - docker
+addons:
+  ssh_known_hosts: helper.gtmdcm.com
+language: node_js
+jobs:
+  include:
+    - stage: build
+      language: node_js
+      node_js: node
+      install:
+        - yarn global add typescript tsc
+        - yarn
+      script:
+        - set -e
+        - yarn build
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        - docker build . pdf-generator
+        - docker tag pdf-generator $DOCKER_USERNAME/pdf-generator
+        - docker push $DOCKER_USERNAME/pdf-generator

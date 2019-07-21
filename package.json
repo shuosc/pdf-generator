@@ -19,7 +19,7 @@
     "typescript": "^3.5.3"
   },
   "scripts": {
-    "start": "tsc && node dist/index.js",
+    "build": "tsc ./src/*.ts",
     "dev": "nodemon --watch 'src/**/*' -e ts,tsx --exec 'ts-node' ./src/index.ts"
   }
 }
