@@ -13,6 +13,6 @@ jobs:
         - set -e
         - yarn build
         - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
-        - docker build .
+        - docker build -t pdf-generator .
         - docker tag pdf-generator $DOCKER_USERNAME/pdf-generator
         - docker push $DOCKER_USERNAME/pdf-generator
