@@ -14,7 +14,7 @@ jobs:
       script:
         - set -e
         - yarn build
-        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
         - docker build . pdf-generator
         - docker tag pdf-generator $DOCKER_USERNAME/pdf-generator
         - docker push $DOCKER_USERNAME/pdf-generator
