@@ -1,8 +1,10 @@
 import * as Koa from 'koa';
 import * as Router from 'koa-router';
+import * as bodyParser from 'koa-bodyparser';
 
 const app = new Koa();
 const router = new Router();
+app.use(bodyParser());
 
 const PdfPrinter = require("pdfmake");
 const fonts = {
@@ -15,21 +17,11 @@ const fonts = {
 
 const printer = new PdfPrinter(fonts);
 
-// your code goes here
-// now it is a simple example for pdfmake
-// please read doc of PdfMake here
-// https://pdfmake.github.io/docs/
-router.get('/*', async (ctx) => {
-    let pdfData = {
-        defaultStyle: {
-            font: 'SourceHanSans'
-        },
-        content: [
-            {text: '电子档案', style: 'header'}
-        ]
-    };
-    let options = {};
-    let pdfDoc = printer.createPdfKitDocument(pdfData, options);
+router.get('/ping', async (ctx) => {
+    ctx.body = 'pong';
+});
+router.post('/*', async (ctx) => {
+    let pdfDoc = printer.createPdfKitDocument(ctx.request.body, {});
     ctx.body = ctx.req.pipe(pdfDoc);
 });
 
